@@ -30,6 +30,8 @@ using std::string;
 #include <fstream>
 using std::ifstream;
 #include <cmath>
+#include <vector>
+using std::vector;
 
 
 int main() {
@@ -79,6 +81,7 @@ int main() {
     double y;
     //char ascii_char[] = "$@#%&HO?!*^;:,. ";
     string ascii_char = "$@#%&HO?!*^;:,. ";
+    vector<int> image;
     for (int i = 1; i <= (resx * resy); i++) {
         fin >> rval >> gval >> bval;
         if (!fin) {
@@ -88,7 +91,10 @@ int main() {
             }
             exit(4);
         }
-
+        //save rbg values to vector - change to struct pixel / class pixel
+        image.push_back(rval);
+        image.push_back(gval);
+        image.push_back(bval);
         // Y = 0.2126R + 0.7152G + 0.0722B from HW7
         y = 0.2126*rval + 0.7152*gval + 0.0722*bval;
         //test if y is in bounds
