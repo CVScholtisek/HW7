@@ -29,6 +29,8 @@ using std::endl;
 using std::string;
 #include <fstream>
 using std::ifstream;
+#include <cmath>
+
 
 int main() {
     std::cout << "Convert PPM to Ascii" << std::endl;
@@ -69,15 +71,39 @@ int main() {
     cout << "Maximum Value: " << maxval << endl;
 
     //RGB loop 80x80
-    int rval, gval, bval;
+    int rval, gval, bval, inty, div_inty;
+    double y;
     for (int i = 0; i < (resx * resy); i++) {
         fin >> rval >> gval >> bval;
         if (!fin) {
             cout << "Error reading " << infile << endl;
             exit(4);
         }
-        cout << rval << " " << gval << " " << bval << " " << endl;
+
+        // Y = 0.2126R + 0.7152G + 0.0722B from HW7
+        y = 0.2126*rval + 0.7152*gval + 0.0722*bval;
+        //test if y is in bounds
+        if (y < 0 or y > 255){
+            cout << "Error, y value out of bounds" << endl;
+            exit(5);
+        }
+        // convert y into integer
+        inty = (int) round(y);
+        if (inty < 0 or inty > 255){
+            cout << "Error, y value out of bounds" << endl;
+            exit(5);
+        }
+        // divide by 16
+        div_inty = inty / 16;
+        if (div_inty < 0 or div_inty > 15){
+            cout << "Error, y value out of bounds" << endl;
+            exit(5);
+        }
+        cout << rval << " " << gval << " " << bval << " = " << y << " = " << inty;
+        cout << " = " << div_inty << endl;
     }
+
+
     cout << "Program Finished" << endl;
     return 0;
 }
