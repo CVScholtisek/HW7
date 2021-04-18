@@ -73,7 +73,8 @@ int main() {
     //RGB loop 80x80
     int rval, gval, bval, inty, div_inty;
     double y;
-    for (int i = 0; i < (resx * resy); i++) {
+    char ascii_char[] = "$@#%&HO?!*^;:,. ";
+    for (int i = 1; i <= (resx * resy); i++) {
         fin >> rval >> gval >> bval;
         if (!fin) {
             cout << "Error reading " << infile << endl;
@@ -99,8 +100,10 @@ int main() {
             cout << "Error, y value out of bounds" << endl;
             exit(5);
         }
-        cout << rval << " " << gval << " " << bval << " = " << y << " = " << inty;
-        cout << " = " << div_inty << endl;
+        //cout << rval << " " << gval << " " << bval << " = " << y << " = " << inty;
+        //cout << " = " << div_inty << endl;
+        cout << ascii_char[div_inty];
+        if (i % resx == 0) cout << endl;
     }
 
 
