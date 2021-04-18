@@ -68,5 +68,16 @@ int main() {
     cout << "Image Size: " << resx << "x" << resy << endl;
     cout << "Maximum Value: " << maxval << endl;
 
+    //RGB loop 80x80
+    int rval, gval, bval;
+    for (int i = 0; i < (resx * resy); i++) {
+        fin >> rval >> gval >> bval;
+        if (!fin) {
+            cout << "Error reading " << infile << endl;
+            exit(4);
+        }
+        cout << rval << " " << gval << " " << bval << " " << endl;
+    }
+    cout << "Program Finished" << endl;
     return 0;
 }
