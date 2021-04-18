@@ -47,15 +47,19 @@ int main() {
     //read "magic number"
     string line;
     getline(fin, line);
-    if (line[0] == 'P' and line[1] == '3'){
-        cout << "PPM (text)" << endl;
-    } else{
+    if (line.size() < 2 or (line.at(0) != 'P' and line.at(1) != '3')) {
         cout << "Cannot find P3 magic number" << endl;
         exit(2);
+    } else{
+        cout << "PMM (text)" << endl;
     }
 
     //Ignore Comments
     getline(fin,line);
+    if (!fin){
+        cout << "Error reading file" << endl;
+        exit(3);
+    }
     if (line[0] == '#'){
         cout << "Ignoring comment" << endl;
     }
@@ -73,11 +77,15 @@ int main() {
     //RGB loop 80x80
     int rval, gval, bval, inty, div_inty;
     double y;
-    char ascii_char[] = "$@#%&HO?!*^;:,. ";
+    //char ascii_char[] = "$@#%&HO?!*^;:,. ";
+    string ascii_char = "$@#%&HO?!*^;:,. ";
     for (int i = 1; i <= (resx * resy); i++) {
         fin >> rval >> gval >> bval;
         if (!fin) {
             cout << "Error reading " << infile << endl;
+            if (fin.eof()) {
+                cout << "Reached end of file" << endl;
+            }
             exit(4);
         }
 
@@ -100,6 +108,7 @@ int main() {
             cout << "Error, y value out of bounds" << endl;
             exit(5);
         }
+        //Print raw data
         //cout << rval << " " << gval << " " << bval << " = " << y << " = " << inty;
         //cout << " = " << div_inty << endl;
         cout << ascii_char[div_inty];
