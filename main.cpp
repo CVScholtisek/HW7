@@ -3,6 +3,9 @@
  * convert to grayscale
  * convert to ascii
  * read out ascii
+ * Jon Genetti
+ * 4/18/2021
+ * CS 201
  */
 
 /*
@@ -73,15 +76,20 @@ int main() {
         cout << "Error reading " << infile << endl;
         exit(3);
     }
+    //Print resolution values
     cout << "Image Size: " << resx << "x" << resy << endl;
     cout << "Maximum Value: " << maxval << endl;
 
-    //RGB loop 80x80
+    //RGB loop by resx * resy
     int rval, gval, bval, inty, div_inty;
     double y;
     //char ascii_char[] = "$@#%&HO?!*^;:,. ";
+    //characters to choose from
     string ascii_char = "$@#%&HO?!*^;:,. ";
     vector<int> image;
+
+
+    //loop resx * resy
     for (int i = 1; i <= (resx * resy); i++) {
         fin >> rval >> gval >> bval;
         if (!fin) {
